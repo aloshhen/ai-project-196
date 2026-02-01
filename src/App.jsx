@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Star, Music, Instagram, Send, X } from 'lucide-react'
+import { Star, Music, Instagram, Send } from 'lucide-react'
 
 function App() {
   const [showIntro, setShowIntro] = useState(true)
@@ -40,12 +40,6 @@ function App() {
   if (showIntro) {
     return (
       <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-        <button
-          onClick={() => setShowIntro(false)}
-          className="absolute top-6 right-6 z-50 w-12 h-12 bg-hot-pink rounded-full flex items-center justify-center neon-pulse hover:scale-110 transition-transform"
-        >
-          <X className="w-6 h-6 text-white" />
-        </button>
         <div className="relative w-full h-full">
           <video
             src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-video-1769988133.MOV?"
@@ -102,10 +96,16 @@ function App() {
           
           <div className="space-y-3 mb-12">
             <p className="text-xl sm:text-2xl font-bold text-neon-pink glitch tracking-wider">
-              VIPER OF OBOLON
+              Вайпер Оболони
             </p>
             <p className="text-lg sm:text-xl font-bold text-hot-pink tracking-wider">
-              PRAGUE SNUS AMBASSADOR
+              Амбассадор снюса в Праге
+            </p>
+            <p className="text-lg sm:text-xl font-bold text-hot-pink tracking-wider">
+              Самый возбуждающий пупок
+            </p>
+            <p className="text-lg sm:text-xl font-bold text-hot-pink tracking-wider">
+              Любимый фильм: Магнолия
             </p>
           </div>
           
@@ -135,14 +135,14 @@ function App() {
             THE ESSENCE
           </motion.h2>
           
-          <div className="space-y-12">
+          <div className="space-y-16">
             <motion.div
               initial={{ opacity: 0, x: -200 }}
               animate={isEssenceInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-right"
+              className="text-center"
             >
-              <p className="text-3xl sm:text-5xl font-black text-neon-pink tracking-tight">
+              <p className="text-2xl sm:text-4xl md:text-5xl font-black text-neon-pink tracking-tight leading-tight">
                 Leather Pants Power
               </p>
             </motion.div>
@@ -151,10 +151,11 @@ function App() {
               initial={{ opacity: 0, x: 200 }}
               animate={isEssenceInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-left"
+              className="text-center"
             >
-              <p className="text-3xl sm:text-5xl font-black text-white tracking-tight glitch">
-                Возбуждающая родинка на лбу
+              <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight glitch leading-tight">
+                Возбуждающая
+                <br className="sm:hidden" /> родинка на лбу
               </p>
             </motion.div>
             
@@ -164,8 +165,9 @@ function App() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-center"
             >
-              <p className="text-4xl sm:text-6xl font-black text-neon-pink tracking-tight">
-                Самый красивый в мире пупок
+              <p className="text-2xl sm:text-4xl md:text-5xl font-black text-neon-pink tracking-tight leading-tight">
+                Самый красивый
+                <br className="sm:hidden" /> в мире пупок
               </p>
             </motion.div>
           </div>
@@ -176,7 +178,7 @@ function App() {
       <section className="relative py-20 px-4 bg-black">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl sm:text-6xl font-black text-center mb-4 text-neon-pink glitch">
-            THE SOUND
+            Favorite Music
           </h2>
           <p className="text-center text-hot-pink mb-12 text-lg font-pixel text-xs sm:text-sm">
             PLAYLIST VIBES
@@ -261,7 +263,7 @@ function App() {
                 className="w-full"
               >
                 <div className="relative w-full">
-                  <div className="pixel-border bg-black p-4 sm:p-6 rounded-lg">
+                  <div className="bg-black p-4 sm:p-6 rounded-lg">
                     <img
                       src={mediaItems[currentSlide].url}
                       alt={mediaItems[currentSlide].caption}
@@ -303,7 +305,7 @@ function App() {
           
           <div className="flex justify-center gap-6 sm:gap-12">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/whoatemypopcorn?igsh=MTJ4NjlpNmllZHh2eg=="
               target="_blank"
               rel="noopener noreferrer"
               className="transform hover:scale-110 transition-transform"
@@ -314,24 +316,13 @@ function App() {
             </a>
             
             <a
-              href="https://t.me"
+              href="https://t.me/er11ka"
               target="_blank"
               rel="noopener noreferrer"
               className="transform hover:scale-110 transition-transform"
             >
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-hot-pink rounded-full flex items-center justify-center neon-pulse">
                 <Send className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-              </div>
-            </a>
-            
-            <a
-              href="https://tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transform hover:scale-110 transition-transform"
-            >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-hot-pink rounded-full flex items-center justify-center neon-pulse">
-                <Music className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
               </div>
             </a>
           </div>
