@@ -1,20 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Star, Music, Instagram, Send } from 'lucide-react'
+import { Star, Music, Instagram, Send, X } from 'lucide-react'
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true)
   const [currentSlide, setCurrentSlide] = useState(0)
   const essenceRef = useRef(null)
   const isEssenceInView = useInView(essenceRef, { once: true })
   
   const mediaItems = [
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/user-photo-1.jpg?', caption: 'VIPER MODE' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/user-photo-1.jpg?', caption: 'OBOLON QUEEN' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/user-photo-1.jpg?', caption: 'LEATHER POWER' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/user-photo-1.jpg?', caption: 'PINK VIBES' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/user-photo-1.jpg?', caption: 'SNUS AMBASSADOR' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/user-photo-1.jpg?', caption: 'TECHNO NIGHTS' },
-    { type: 'video', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/user-video-1.MOV?', caption: 'LIVE ESSENCE' }
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987939.jpg?', caption: 'настраиваю живот' },
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987992.jpg?', caption: 'в паузе от спецоперации' },
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769988036.jpg?', caption: 'в Омане на спецоперации' },
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769988070.jpg?', caption: 'ну когда уже пройдут эти сопли' }
   ]
   
   const artists = [
@@ -32,6 +30,42 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowIntro(false)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (showIntro) {
+    return (
+      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+        <button
+          onClick={() => setShowIntro(false)}
+          className="absolute top-6 right-6 z-50 w-12 h-12 bg-hot-pink rounded-full flex items-center justify-center neon-pulse hover:scale-110 transition-transform"
+        >
+          <X className="w-6 h-6 text-white" />
+        </button>
+        <div className="relative w-full h-full">
+          <video
+            src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-video-1769988133.MOV?"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute bottom-12 left-0 right-0 text-center z-10 px-4">
+            <p className="text-3xl sm:text-5xl font-black text-neon-pink glitch font-pixel text-xs sm:text-base">
+              разминаю шею
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-black overflow-x-hidden">
       {/* HERO */}
@@ -48,6 +82,18 @@ function App() {
           transition={{ duration: 1 }}
           className="relative z-10 text-center"
         >
+          {/* Profile Photo Circle */}
+          <div className="mb-8 flex justify-center">
+            <div className="relative w-48 h-48 sm:w-64 sm:h-64">
+              <div className="absolute inset-0 rounded-full pixel-border animate-pulse" />
+              <img
+                src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987641.jpg?"
+                alt="Katya Golubenko"
+                className="w-full h-full object-cover rounded-full border-4 border-black"
+              />
+            </div>
+          </div>
+
           <h1 className="text-5xl sm:text-7xl md:text-8xl font-black text-white mb-6 glitch text-stroke-pink tracking-tighter leading-none">
             KATYA
             <br />
@@ -161,22 +207,16 @@ function App() {
         </div>
       </section>
 
-      {/* VIBE CHAPTERS */}
+      {/* MY PASSION */}
       <section className="relative py-20 px-4">
-        {/* OMAN */}
-        <div className="min-h-screen flex items-center justify-center mb-20 sand-wave">
-          <div className="text-center">
-            <h3 className="text-7xl sm:text-9xl font-black text-white mb-8 tracking-tighter" style={{ textShadow: '0 0 40px #FF69B4' }}>
-              OMAN
-            </h3>
-            <p className="text-2xl sm:text-4xl text-white font-bold">
-              Luxury Escape. Dunes & Dreams.
-            </p>
-          </div>
+        <div className="max-w-6xl mx-auto mb-12">
+          <h2 className="text-4xl sm:text-6xl font-black text-center mb-16 text-neon-pink glitch">
+            MY PASSION
+          </h2>
         </div>
-        
+
         {/* TECHNO */}
-        <div className="min-h-screen flex items-center justify-center mb-20 bg-black relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             {[...Array(20)].map((_, i) => (
               <div
@@ -201,18 +241,6 @@ function App() {
             </p>
           </div>
         </div>
-        
-        {/* BANYA */}
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black">
-          <div className="text-center">
-            <h3 className="text-7xl sm:text-9xl font-black text-white mb-8 tracking-tighter blur-steam">
-              BANYA
-            </h3>
-            <p className="text-2xl sm:text-4xl text-hot-pink font-bold blur-steam">
-              Non-stop steam. Detox for Vipers.
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* THE ARCHIVE */}
@@ -222,7 +250,7 @@ function App() {
             THE ARCHIVE
           </h2>
           
-          <div className="relative h-[500px] sm:h-[600px] overflow-hidden">
+          <div className="relative overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -230,27 +258,16 @@ function App() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -300 }}
                 transition={{ duration: 0.5 }}
-                className="absolute inset-0 flex items-center justify-center"
+                className="w-full"
               >
-                <div className="relative max-w-md w-full">
+                <div className="relative w-full">
                   <div className="pixel-border bg-black p-4 sm:p-6 rounded-lg">
-                    {mediaItems[currentSlide].type === 'image' ? (
-                      <img
-                        src={mediaItems[currentSlide].url}
-                        alt={mediaItems[currentSlide].caption}
-                        className="w-full h-64 sm:h-96 object-cover rounded"
-                      />
-                    ) : (
-                      <video
-                        src={mediaItems[currentSlide].url}
-                        className="w-full h-64 sm:h-96 object-cover rounded"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                      />
-                    )}
-                    <p className="text-2xl sm:text-3xl font-black text-hot-pink mt-4 text-center font-pixel text-xs sm:text-sm">
+                    <img
+                      src={mediaItems[currentSlide].url}
+                      alt={mediaItems[currentSlide].caption}
+                      className="w-full h-auto object-contain rounded"
+                    />
+                    <p className="text-2xl sm:text-3xl font-black text-hot-pink mt-6 text-center font-pixel text-xs sm:text-sm">
                       {mediaItems[currentSlide].caption}
                     </p>
                   </div>
