@@ -78,21 +78,6 @@
     }
   }
   
-  .sand-wave {
-    background: linear-gradient(45deg, #FF69B4 0%, #FF10F0 25%, #FF69B4 50%, #FF10F0 75%, #FF69B4 100%);
-    background-size: 400% 400%;
-    animation: sand-wave 8s ease infinite;
-  }
-  
-  @keyframes sand-wave {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-  
   .matrix-glitch {
     animation: matrix-glitch 0.5s infinite;
   }
@@ -109,21 +94,6 @@
     20%, 40%, 60%, 80% {
       transform: translate(2px, -2px) skew(-2deg);
       filter: hue-rotate(180deg);
-    }
-  }
-  
-  .blur-steam {
-    animation: blur-steam 4s ease-in-out infinite;
-  }
-  
-  @keyframes blur-steam {
-    0%, 100% {
-      filter: blur(0px);
-      opacity: 1;
-    }
-    50% {
-      filter: blur(8px);
-      opacity: 0.7;
     }
   }
   
