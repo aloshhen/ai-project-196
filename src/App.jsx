@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Star, Music, Instagram, Send } from 'lucide-react'
+import { Star, Music, Instagram, Send, Heart, Zap, Award } from 'lucide-react'
 
 function App() {
   const [showIntro, setShowIntro] = useState(true)
@@ -66,7 +66,7 @@ function App() {
 
   if (showIntro) {
     return (
-      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center noise-bg scanlines">
         <div className="relative w-full h-full">
           <video
             src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-video-1769988133.MOV?"
@@ -76,9 +76,9 @@ function App() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/40" />
           <div className="absolute bottom-12 left-0 right-0 text-center z-10 px-4">
-            <p className="text-3xl sm:text-5xl font-black text-neon-pink glitch font-pixel text-xs sm:text-base">
+            <p className="text-3xl sm:text-5xl font-black text-mega-neon glitch-brutal font-pixel text-xs sm:text-base">
               разминаю шею
             </p>
           </div>
@@ -88,13 +88,59 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-black overflow-x-hidden">
+    <div className="min-h-screen bg-black overflow-x-hidden noise-bg scanlines">
+      {/* Floating Decorations */}
+      <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <Star
+            key={`star-${i}`}
+            className="absolute text-acid-pink star-decoration"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${12 + Math.random() * 20}px`,
+              height: `${12 + Math.random() * 20}px`,
+              animationDelay: `${Math.random() * 2}s`,
+              filter: 'drop-shadow(0 0 8px #FF10F0)',
+            }}
+          />
+        ))}
+        {[...Array(10)].map((_, i) => (
+          <Heart
+            key={`heart-${i}`}
+            className="absolute text-cyber-pink heart-beat"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${10 + Math.random() * 16}px`,
+              height: `${10 + Math.random() * 16}px`,
+              animationDelay: `${Math.random() * 1.5}s`,
+              filter: 'drop-shadow(0 0 6px #FF1493)',
+            }}
+          />
+        ))}
+        {[...Array(8)].map((_, i) => (
+          <Zap
+            key={`zap-${i}`}
+            className="absolute text-neon-pink float-brutal"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${14 + Math.random() * 18}px`,
+              height: `${14 + Math.random() * 18}px`,
+              animationDelay: `${Math.random() * 3}s`,
+              filter: 'drop-shadow(0 0 10px #FF00FF)',
+            }}
+          />
+        ))}
+      </div>
+
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-12">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-fuchsia-950 to-black opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-acid-pink/20 to-black" />
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-2 bg-hot-pink animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-full h-2 bg-hot-pink animate-pulse" />
+          <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-acid-pink via-neon-pink to-acid-pink animate-pulse" />
+          <div className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-acid-pink via-neon-pink to-acid-pink animate-pulse" />
         </div>
         
         <motion.div
@@ -103,60 +149,89 @@ function App() {
           transition={{ duration: 1 }}
           className="relative z-10 text-center"
         >
-          {/* Profile Photo Circle - Made Larger */}
-          <div className="mb-8 flex justify-center">
+          {/* Profile Photo Circle */}
+          <div className="mb-12 flex justify-center">
             <div className="relative w-72 h-72 sm:w-96 sm:h-96">
-              <div className="absolute inset-0 rounded-full pixel-border animate-pulse" />
+              <div className="absolute inset-0 rounded-full pixel-border-brutal neon-pulse-brutal" />
               <img
                 src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987641.jpg?"
                 alt="Katya Golubenko"
-                className="w-full h-full object-cover rounded-full border-4 border-black"
+                className="w-full h-full object-cover rounded-full border-8 border-black relative z-10"
               />
+              <Star className="absolute -top-6 -right-6 w-16 h-16 text-acid-pink star-decoration" style={{ filter: 'drop-shadow(0 0 15px #FF10F0)' }} />
+              <Heart className="absolute -bottom-6 -left-6 w-14 h-14 text-cyber-pink heart-beat" style={{ filter: 'drop-shadow(0 0 12px #FF1493)' }} />
             </div>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black text-white mb-6 glitch text-stroke-pink tracking-tighter leading-none">
-            KATYA
+          <h1 className="text-6xl sm:text-8xl md:text-9xl font-black text-mega-neon mb-8 glitch-brutal tracking-tighter leading-none">
+            ★ KATYA ★
             <br />
             GOLUBENKO
           </h1>
           
+          <div className="mb-8">
+            <p className="text-3xl sm:text-5xl font-black text-chrome mb-2">
+              VIPER OF OBOLON
+            </p>
+            <p className="text-xl sm:text-3xl font-bold text-hot-pink glitch-brutal">
+              PRAGUE SNUS AMBASSADOR
+            </p>
+          </div>
+          
           <motion.div
-            animate={{ y: [0, 15, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            animate={{ y: [0, 20, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity }}
             className="mt-16"
           >
-            <Star className="w-12 h-12 text-hot-pink mx-auto float" style={{ filter: 'drop-shadow(0 0 20px #FF69B4)' }} />
-            <p className="text-hot-pink text-sm mt-4 font-pixel">SCROLL DOWN</p>
+            <Award className="w-16 h-16 text-acid-pink mx-auto float-brutal" style={{ filter: 'drop-shadow(0 0 25px #FF10F0)' }} />
+            <p className="text-acid-pink text-sm mt-6 font-pixel tracking-wider">★ SCROLL DOWN ★</p>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* THE ESSENCE - Redesigned */}
+      {/* Marquee Ticker */}
+      <div className="relative bg-acid-pink py-4 overflow-hidden border-y-4 border-black">
+        <div className="flex whitespace-nowrap marquee">
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">★ VIPER OF OBOLON ★</span>
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">♥ LEATHER PANTS POWER ♥</span>
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">★ TECHNO 24/7 ★</span>
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">♥ MATCHA LATTE SIP ♥</span>
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">★ VIPER OF OBOLON ★</span>
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">♥ LEATHER PANTS POWER ♥</span>
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">★ TECHNO 24/7 ★</span>
+          <span className="text-2xl sm:text-4xl font-black text-black mx-8">♥ MATCHA LATTE SIP ♥</span>
+        </div>
+      </div>
+
+      {/* THE ESSENCE */}
       <section 
         ref={essenceRef}
-        className="relative min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-b from-fuchsia-600 via-fuchsia-900 to-black"
+        className="relative min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-b from-acid-pink via-cyber-pink to-black"
       >
-        <div className="max-w-6xl mx-auto w-full">
+        <div className="max-w-6xl mx-auto w-full relative z-10">
           <motion.h2
             initial={{ opacity: 0, x: -100 }}
             animate={isEssenceInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-6xl font-black text-white mb-12 text-center glitch"
+            className="text-5xl sm:text-7xl font-black text-white mb-16 text-center glitch-brutal"
+            style={{
+              textShadow: '0 0 20px #FF10F0, 0 0 40px #FF10F0, 0 0 60px #FF00FF',
+            }}
           >
-            HIGHLIGHTS & QUOTES
+            ★ HIGHLIGHTS & QUOTES ★
           </motion.h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {essenceItems.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
                 animate={isEssenceInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="pixel-border bg-gradient-to-br from-black to-fuchsia-950 p-6 rounded-xl transform hover:scale-105 transition-transform"
+                className="pixel-border-brutal bg-black p-8 rounded-none transform hover:scale-105 transition-transform relative"
               >
-                <p className="text-xl sm:text-2xl font-bold text-neon-pink text-center leading-tight">
+                <Star className="absolute -top-3 -right-3 w-8 h-8 text-acid-pink star-decoration" />
+                <p className="text-xl sm:text-2xl font-black text-acid-pink text-center leading-tight uppercase">
                   {item}
                 </p>
               </motion.div>
@@ -168,14 +243,14 @@ function App() {
       {/* PLAYLIST */}
       <section className="relative py-20 px-4 bg-black">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl sm:text-6xl font-black text-center mb-4 text-neon-pink glitch">
-            Favorite Music
+          <h2 className="text-5xl sm:text-7xl font-black text-center mb-6 text-mega-neon glitch-brutal">
+            ♪ PLAYLIST ♪
           </h2>
-          <p className="text-center text-hot-pink mb-12 text-lg font-pixel text-xs sm:text-sm">
-            PLAYLIST VIBES
+          <p className="text-center text-chrome mb-16 text-2xl font-black tracking-wider">
+            THE SOUND
           </p>
           
-          <div className="space-y-4">
+          <div className="space-y-6">
             {artists.map((artist, index) => (
               <motion.div
                 key={index}
@@ -183,22 +258,20 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="pixel-border bg-gradient-to-r from-black to-fuchsia-950 p-6 rounded-lg transform hover:scale-105 transition-transform"
+                className="pixel-border-brutal bg-gradient-to-r from-black via-acid-pink/20 to-black p-8 rounded-none transform hover:scale-105 transition-transform relative"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 rounded-lg overflow-hidden border-2 border-hot-pink">
+                <Music className="absolute -top-4 -right-4 w-10 h-10 text-acid-pink star-decoration bg-black p-2 rounded-full" style={{ filter: 'drop-shadow(0 0 10px #FF10F0)' }} />
+                <div className="flex items-center gap-6">
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-none overflow-hidden border-4 border-acid-pink neon-pulse-brutal">
                     <img
                       src={artist.image}
                       alt={artist.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-xl sm:text-2xl font-bold text-white flex-1">
+                  <p className="text-2xl sm:text-3xl font-black text-white flex-1 uppercase glitch-brutal">
                     {artist.name}
                   </p>
-                  <div className="w-8 h-8 bg-hot-pink flex items-center justify-center" style={{ imageRendering: 'pixelated' }}>
-                    <Music className="w-4 h-4 text-black" />
-                  </div>
                 </div>
               </motion.div>
             ))}
@@ -206,47 +279,47 @@ function App() {
         </div>
       </section>
 
-      {/* MY PASSION */}
+      {/* MY PASSION - TECHNO */}
       <section className="relative py-20 px-4">
-        <div className="max-w-6xl mx-auto mb-12">
-          <h2 className="text-4xl sm:text-6xl font-black text-center mb-16 text-neon-pink glitch">
-            MY PASSION
-          </h2>
-        </div>
-
-        {/* TECHNO */}
         <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            {[...Array(20)].map((_, i) => (
+          <div className="absolute inset-0 opacity-30">
+            {[...Array(30)].map((_, i) => (
               <div
                 key={i}
-                className="absolute text-green-500 font-mono text-xs"
+                className="absolute text-green-400 font-mono text-lg font-bold"
                 style={{
                   top: `${Math.random() * 100}%`,
                   left: `${Math.random() * 100}%`,
-                  animation: `fall ${3 + Math.random() * 2}s linear infinite`,
+                  animation: `fall ${2 + Math.random() * 3}s linear infinite`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  textShadow: '0 0 10px #00ff00',
                 }}
               >
-                {Math.random().toString(36).substring(7)}
+                {Math.random().toString(36).substring(2, 8).toUpperCase()}
               </div>
             ))}
           </div>
           <div className="text-center relative z-10">
-            <h3 className="text-6xl sm:text-9xl font-black text-green-500 mb-8 tracking-tighter matrix-glitch font-mono">
-              TECHNO
+            <h3 className="text-7xl sm:text-9xl font-black text-green-400 mb-12 tracking-tighter matrix-glitch-brutal font-mono uppercase"
+              style={{
+                textShadow: '0 0 30px #00ff00, 0 0 60px #00ff00',
+              }}
+            >
+              ★ TECHNO ★
             </h3>
-            <p className="text-2xl sm:text-4xl text-hot-pink font-bold glitch">
+            <p className="text-3xl sm:text-5xl text-acid-pink font-black glitch-brutal uppercase">
               Raves 24/7. Harder. Faster. Pinker.
             </p>
+            <Zap className="w-20 h-20 text-acid-pink mx-auto mt-12 float-brutal" style={{ filter: 'drop-shadow(0 0 20px #FF10F0)' }} />
           </div>
         </div>
       </section>
 
       {/* THE ARCHIVE */}
-      <section className="relative py-20 px-4 bg-black">
+      <section className="relative py-20 px-4 bg-gradient-to-b from-black to-acid-pink/20">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-6xl font-black text-center mb-16 text-neon-pink glitch">
-            THE ARCHIVE
+          <h2 className="text-5xl sm:text-7xl font-black text-center mb-20 text-mega-neon glitch-brutal">
+            ★ THE ARCHIVE ★
           </h2>
           
           <div className="relative overflow-hidden">
@@ -260,14 +333,20 @@ function App() {
                 className="w-full"
               >
                 <div className="relative w-full">
-                  <div className="bg-black p-4 sm:p-6 rounded-lg">
+                  <div className="pixel-border-brutal bg-black p-8 sm:p-12 rounded-none relative">
+                    <Star className="absolute -top-6 -left-6 w-16 h-16 text-acid-pink star-decoration" style={{ filter: 'drop-shadow(0 0 15px #FF10F0)' }} />
+                    <Heart className="absolute -top-6 -right-6 w-14 h-14 text-cyber-pink heart-beat" style={{ filter: 'drop-shadow(0 0 12px #FF1493)' }} />
                     <img
                       src={mediaItems[currentSlide].url}
                       alt={mediaItems[currentSlide].caption}
-                      className="w-full h-auto object-contain rounded"
+                      className="w-full h-auto object-contain rounded-none border-4 border-acid-pink"
                     />
-                    <p className="text-2xl sm:text-3xl font-black text-hot-pink mt-6 text-center font-pixel text-xs sm:text-sm">
-                      {mediaItems[currentSlide].caption}
+                    <p className="text-2xl sm:text-4xl font-black text-acid-pink mt-8 text-center font-pixel text-sm sm:text-base uppercase"
+                      style={{
+                        textShadow: '0 0 15px #FF10F0',
+                      }}
+                    >
+                      ★ {mediaItems[currentSlide].caption} ★
                     </p>
                   </div>
                 </div>
@@ -275,14 +354,19 @@ function App() {
             </AnimatePresence>
           </div>
           
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-4 mt-12">
             {mediaItems.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentSlide ? 'bg-hot-pink w-8' : 'bg-gray-600'
+                className={`transition-all ${
+                  index === currentSlide 
+                    ? 'w-12 h-4 bg-acid-pink neon-pulse-brutal' 
+                    : 'w-4 h-4 bg-gray-600 hover:bg-gray-400'
                 }`}
+                style={{
+                  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                }}
               />
             ))}
           </div>
@@ -290,25 +374,28 @@ function App() {
       </section>
 
       {/* FOOTER */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-black to-fuchsia-950">
+      <section className="relative py-20 px-4 bg-gradient-to-b from-acid-pink/20 to-black border-t-4 border-acid-pink">
         <div className="max-w-2xl mx-auto text-center">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-hot-pink hover:bg-fuchsia-600 text-white text-3xl sm:text-5xl font-black py-8 sm:py-12 rounded-2xl mb-12 neon-pulse transition-all"
+            className="w-full bg-acid-pink hover:bg-cyber-pink text-black text-4xl sm:text-6xl font-black py-12 sm:py-16 rounded-none mb-16 neon-pulse-brutal transition-all uppercase border-8 border-black relative overflow-hidden"
           >
-            HIT ME UP
+            <Star className="absolute top-4 left-4 w-12 h-12 text-black star-decoration" />
+            <Star className="absolute top-4 right-4 w-12 h-12 text-black star-decoration" />
+            <Heart className="absolute bottom-4 left-1/2 -translate-x-1/2 w-10 h-10 text-black heart-beat" />
+            ★ HIT ME UP ★
           </motion.button>
           
-          <div className="flex justify-center gap-6 sm:gap-12">
+          <div className="flex justify-center gap-8 sm:gap-16">
             <a
               href="https://www.instagram.com/whoatemypopcorn?igsh=MTJ4NjlpNmllZHh2eg=="
               target="_blank"
               rel="noopener noreferrer"
               className="transform hover:scale-110 transition-transform"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-hot-pink rounded-full flex items-center justify-center neon-pulse">
-                <Instagram className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+              <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-acid-pink to-cyber-pink rounded-none flex items-center justify-center neon-pulse-brutal border-4 border-black">
+                <Instagram className="w-10 h-10 sm:w-14 sm:h-14 text-black" />
               </div>
             </a>
             
@@ -318,14 +405,18 @@ function App() {
               rel="noopener noreferrer"
               className="transform hover:scale-110 transition-transform"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-hot-pink rounded-full flex items-center justify-center neon-pulse">
-                <Send className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+              <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-acid-pink to-cyber-pink rounded-none flex items-center justify-center neon-pulse-brutal border-4 border-black">
+                <Send className="w-10 h-10 sm:w-14 sm:h-14 text-black" />
               </div>
             </a>
           </div>
           
-          <p className="text-hot-pink mt-12 font-pixel text-xs">
-            © 2024 VIPER OF OBOLON
+          <p className="text-acid-pink mt-16 font-pixel text-xs sm:text-sm tracking-wider"
+            style={{
+              textShadow: '0 0 10px #FF10F0',
+            }}
+          >
+            ★ © 2024 VIPER OF OBOLON ★
           </p>
         </div>
       </section>
