@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Star, Music, Instagram, Send, Heart, Zap, Award } from 'lucide-react'
 
@@ -16,14 +16,14 @@ function App() {
   const isArchiveInView = useInView(archiveRef, { once: true, margin: "-100px" })
   const isFooterInView = useInView(footerRef, { once: true, margin: "-100px" })
   
-  const mediaItems = [
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987939.jpg?', caption: 'настраиваю живот' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987992.jpg?', caption: 'в паузе от спецоперации' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769988036.jpg?', caption: 'в Омане на спецоперации' },
-    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769988070.jpg?', caption: 'ну когда уже пройдут эти сопли' }
-  ]
+  const mediaItems = useMemo(() => [
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987939.jpg?', caption: 'настраиваю живот', width: 800, height: 1067 },
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987992.jpg?', caption: 'в паузе от спецоперации', width: 800, height: 1067 },
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769988036.jpg?', caption: 'в Омане на спецоперации', width: 800, height: 1067 },
+    { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769988070.jpg?', caption: 'ну когда уже пройдут эти сопли', width: 800, height: 1067 }
+  ], [])
   
-  const artists = [
+  const artists = useMemo(() => [
     { 
       name: 'FreshFact ака Ромчик',
       image: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1770044416.jpg?'
@@ -44,9 +44,9 @@ function App() {
       name: 'Playboy Carti',
       image: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1770044385.jpg?'
     }
-  ]
+  ], [])
 
-  const essenceItems = [
+  const essenceItems = useMemo(() => [
     'Амбассадор снюса в Праге',
     'Самый возбуждающий пупок',
     'Магнолия',
@@ -56,14 +56,14 @@ function App() {
     'Гнущиеся пальцы',
     'Состоит в сообществе «Вайперы Оболони»',
     'Roblox and TikTok is life'
-  ]
+  ], [])
   
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % mediaItems.length)
     }, 3000)
     return () => clearInterval(interval)
-  }, [])
+  }, [mediaItems.length])
 
   return (
     <div className="min-h-screen bg-black overflow-x-hidden noise-bg scanlines">
@@ -139,6 +139,9 @@ function App() {
               <img
                 src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987641.jpg?"
                 alt="Katya Golubenko"
+                width="384"
+                height="384"
+                loading="eager"
                 className="w-full h-full object-cover rounded-full border-8 border-black relative z-10"
               />
               <Star className="absolute -top-6 -right-6 w-16 h-16 text-acid-pink star-decoration" style={{ filter: 'drop-shadow(0 0 15px #FF10F0)' }} />
@@ -274,6 +277,9 @@ function App() {
                     <img
                       src={artist.image}
                       alt={artist.name}
+                      width="128"
+                      height="128"
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -369,11 +375,16 @@ function App() {
                   <div className="pixel-border-brutal bg-black p-8 sm:p-12 rounded-none relative">
                     <Star className="absolute -top-6 -left-6 w-16 h-16 text-acid-pink star-decoration" style={{ filter: 'drop-shadow(0 0 15px #FF10F0)' }} />
                     <Heart className="absolute -top-6 -right-6 w-14 h-14 text-cyber-pink heart-beat" style={{ filter: 'drop-shadow(0 0 12px #FF1493)' }} />
-                    <img
-                      src={mediaItems[currentSlide].url}
-                      alt={mediaItems[currentSlide].caption}
-                      className="w-full h-auto object-contain rounded-none border-4 border-acid-pink"
-                    />
+                    <div className="w-full relative" style={{ paddingBottom: '133.375%' }}>
+                      <img
+                        src={mediaItems[currentSlide].url}
+                        alt={mediaItems[currentSlide].caption}
+                        width={mediaItems[currentSlide].width}
+                        height={mediaItems[currentSlide].height}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-contain rounded-none border-4 border-acid-pink"
+                      />
+                    </div>
                     <p className="text-2xl sm:text-4xl font-black text-acid-pink mt-8 text-center font-pixel text-sm sm:text-base uppercase"
                       style={{
                         textShadow: '0 0 15px #FF10F0',
