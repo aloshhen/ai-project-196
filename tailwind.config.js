@@ -3,12 +3,14 @@ export default {
   theme: {
     extend: {
       colors: {
+        'acid-pink': '#FF10F0',
+        'neon-pink': '#FF00FF',
         'hot-pink': '#FF69B4',
-        'neon-pink': '#FF10F0',
-        'fuchsia': '#FF00FF',
+        'cyber-pink': '#FF1493',
       },
       fontFamily: {
         'pixel': ['"Press Start 2P"', 'cursive'],
+        'brutal': ['"Black Ops One"', 'cursive'],
       },
     },
   },
