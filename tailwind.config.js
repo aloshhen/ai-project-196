@@ -7,6 +7,7 @@ export default {
         'neon-pink': '#FF00FF',
         'hot-pink': '#FF69B4',
         'cyber-pink': '#FF1493',
+        'lime-green': '#32CD32',
       },
       fontFamily: {
         'pixel': ['"Press Start 2P"', 'cursive'],
