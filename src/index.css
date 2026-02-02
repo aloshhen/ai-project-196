@@ -6,67 +6,171 @@
   body {
     @apply overflow-x-hidden;
     -webkit-tap-highlight-color: transparent;
+    background: #000;
   }
 }
 
 @layer utilities {
-  .text-neon-pink {
-    color: #FF69B4;
-    text-shadow: 0 0 10px #FF69B4, 0 0 20px #FF69B4, 0 0 30px #FF69B4, 0 0 40px #FF10F0;
+  /* Noise Texture Background */
+  .noise-bg {
+    position: relative;
   }
   
-  .text-stroke-pink {
-    -webkit-text-stroke: 2px #FF69B4;
-    text-stroke: 2px #FF69B4;
+  .noise-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
   }
   
-  .glitch {
-    animation: glitch 3s infinite;
+  /* Scanlines Effect */
+  .scanlines {
+    position: relative;
   }
   
-  @keyframes glitch {
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+  /* Extreme Neon Text */
+  .text-mega-neon {
+    color: #FF10F0;
+    text-shadow: 
+      0 0 5px #FF10F0,
+      0 0 10px #FF10F0,
+      0 0 20px #FF10F0,
+      0 0 40px #FF10F0,
+      0 0 80px #FF00FF,
+      0 0 120px #FF00FF,
+      0 0 160px #FF00FF;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  
+  .text-chrome {
+    background: linear-gradient(180deg, #fff 0%, #FF10F0 50%, #fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(255, 16, 240, 0.5));
+  }
+  
+  /* Glitch Enhanced */
+  .glitch-brutal {
+    animation: glitch-brutal 4s infinite;
+  }
+  
+  @keyframes glitch-brutal {
     0%, 90%, 100% {
+      transform: translate(0);
       opacity: 1;
-      text-shadow: 0 0 10px #FF69B4, 0 0 20px #FF69B4;
     }
-    91%, 93%, 95%, 97% {
+    91% {
+      transform: translate(-3px, 3px);
       opacity: 0.8;
-      text-shadow: 2px 2px 10px #FF69B4, -2px -2px 20px #00FFFF;
+      filter: hue-rotate(90deg);
     }
-    92%, 94%, 96%, 98% {
+    92% {
+      transform: translate(3px, -3px);
+      opacity: 0.9;
+    }
+    93% {
+      transform: translate(-2px, -2px);
+      opacity: 0.85;
+    }
+    94% {
+      transform: translate(2px, 2px);
       opacity: 1;
-      text-shadow: -2px -2px 10px #FF69B4, 2px 2px 20px #00FFFF;
     }
   }
   
-  .neon-pulse {
-    animation: neon-pulse 1.5s ease-in-out infinite;
+  /* Neon Pulse Enhanced */
+  .neon-pulse-brutal {
+    animation: neon-pulse-brutal 1s ease-in-out infinite;
   }
   
-  @keyframes neon-pulse {
+  @keyframes neon-pulse-brutal {
     0%, 100% {
-      box-shadow: 0 0 20px #FF69B4, 0 0 40px #FF69B4, 0 0 60px #FF10F0;
+      box-shadow: 
+        0 0 10px #FF10F0,
+        0 0 20px #FF10F0,
+        0 0 40px #FF10F0,
+        0 0 80px #FF00FF,
+        inset 0 0 20px rgba(255, 16, 240, 0.3);
     }
     50% {
-      box-shadow: 0 0 10px #FF69B4, 0 0 20px #FF69B4, 0 0 30px #FF10F0;
+      box-shadow: 
+        0 0 5px #FF10F0,
+        0 0 10px #FF10F0,
+        0 0 20px #FF10F0,
+        0 0 40px #FF00FF,
+        inset 0 0 10px rgba(255, 16, 240, 0.2);
     }
   }
   
-  .float {
-    animation: float 3s ease-in-out infinite;
+  /* Star Decorations */
+  .star-decoration {
+    animation: star-twinkle 2s ease-in-out infinite;
   }
   
-  @keyframes float {
+  @keyframes star-twinkle {
     0%, 100% {
-      transform: translateY(0px);
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
     }
     50% {
-      transform: translateY(-20px);
+      opacity: 0.5;
+      transform: scale(1.2) rotate(180deg);
     }
   }
   
+  /* Heart Beat */
+  .heart-beat {
+    animation: heart-beat 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes heart-beat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.1);
+    }
+    50% {
+      transform: scale(1);
+    }
+    75% {
+      transform: scale(1.15);
+    }
+  }
+  
+  /* Pixel Border Brutal */
+  .pixel-border-brutal {
+    box-shadow: 
+      0 0 0 3px #FF10F0,
+      0 0 0 6px #000,
+      0 0 0 9px #FF10F0,
+      0 0 30px #FF10F0,
+      0 0 60px #FF00FF;
+    border: 3px solid #000;
+  }
+  
+  /* Marquee */
   .marquee {
-    animation: marquee 20s linear infinite;
+    animation: marquee 25s linear infinite;
   }
   
   @keyframes marquee {
@@ -78,31 +182,44 @@
     }
   }
   
-  .matrix-glitch {
-    animation: matrix-glitch 0.5s infinite;
+  /* Matrix Glitch Enhanced */
+  .matrix-glitch-brutal {
+    animation: matrix-glitch-brutal 0.3s infinite;
   }
   
-  @keyframes matrix-glitch {
+  @keyframes matrix-glitch-brutal {
     0%, 90%, 100% {
       transform: translate(0, 0) skew(0deg);
       filter: hue-rotate(0deg);
     }
     10%, 30%, 50%, 70% {
-      transform: translate(-2px, 2px) skew(2deg);
-      filter: hue-rotate(90deg);
+      transform: translate(-4px, 4px) skew(4deg);
+      filter: hue-rotate(120deg);
     }
     20%, 40%, 60%, 80% {
-      transform: translate(2px, -2px) skew(-2deg);
-      filter: hue-rotate(180deg);
+      transform: translate(4px, -4px) skew(-4deg);
+      filter: hue-rotate(240deg);
     }
   }
   
-  .pixel-border {
-    box-shadow: 
-      0 0 0 2px #FF69B4,
-      0 0 0 4px #000,
-      0 0 0 6px #FF69B4,
-      0 0 20px #FF69B4;
+  /* Float Enhanced */
+  .float-brutal {
+    animation: float-brutal 4s ease-in-out infinite;
+  }
+  
+  @keyframes float-brutal {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-15px) rotate(5deg);
+    }
+    50% {
+      transform: translateY(-30px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-15px) rotate(-5deg);
+    }
   }
 }
 
