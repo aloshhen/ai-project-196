@@ -3,10 +3,18 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Star, Music, Instagram, Send, Heart, Zap, Award } from 'lucide-react'
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true)
   const [currentSlide, setCurrentSlide] = useState(0)
   const essenceRef = useRef(null)
-  const isEssenceInView = useInView(essenceRef, { once: true })
+  const playlistRef = useRef(null)
+  const technoRef = useRef(null)
+  const archiveRef = useRef(null)
+  const footerRef = useRef(null)
+  
+  const isEssenceInView = useInView(essenceRef, { once: true, margin: "-100px" })
+  const isPlaylistInView = useInView(playlistRef, { once: true, margin: "-100px" })
+  const isTechnoInView = useInView(technoRef, { once: true, margin: "-100px" })
+  const isArchiveInView = useInView(archiveRef, { once: true, margin: "-100px" })
+  const isFooterInView = useInView(footerRef, { once: true, margin: "-100px" })
   
   const mediaItems = [
     { type: 'image', url: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987939.jpg?', caption: 'настраиваю живот' },
@@ -56,36 +64,6 @@ function App() {
     }, 3000)
     return () => clearInterval(interval)
   }, [])
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowIntro(false)
-    }, 5000)
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (showIntro) {
-    return (
-      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center noise-bg scanlines">
-        <div className="relative w-full h-full">
-          <video
-            src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-video-1769988133.MOV?"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute bottom-12 left-0 right-0 text-center z-10 px-4">
-            <p className="text-3xl sm:text-5xl font-black text-mega-neon glitch-brutal font-pixel text-xs sm:text-base">
-              разминаю шею
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen bg-black overflow-x-hidden noise-bg scanlines">
@@ -150,7 +128,12 @@ function App() {
           className="relative z-10 text-center"
         >
           {/* Profile Photo Circle */}
-          <div className="mb-12 flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-12 flex justify-center"
+          >
             <div className="relative w-72 h-72 sm:w-96 sm:h-96">
               <div className="absolute inset-0 rounded-full pixel-border-brutal neon-pulse-brutal" />
               <img
@@ -161,30 +144,46 @@ function App() {
               <Star className="absolute -top-6 -right-6 w-16 h-16 text-acid-pink star-decoration" style={{ filter: 'drop-shadow(0 0 15px #FF10F0)' }} />
               <Heart className="absolute -bottom-6 -left-6 w-14 h-14 text-cyber-pink heart-beat" style={{ filter: 'drop-shadow(0 0 12px #FF1493)' }} />
             </div>
-          </div>
+          </motion.div>
 
-          <h1 className="text-6xl sm:text-8xl md:text-9xl font-black text-mega-neon mb-8 glitch-brutal tracking-tighter leading-none">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-6xl sm:text-8xl md:text-9xl font-black text-soft-neon mb-8 glitch-brutal tracking-tighter leading-none"
+          >
             ★ KATYA ★
             <br />
             GOLUBENKO
-          </h1>
+          </motion.h1>
           
-          <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-8"
+          >
             <p className="text-3xl sm:text-5xl font-black text-chrome mb-2">
               VIPER OF OBOLON
             </p>
             <p className="text-xl sm:text-3xl font-bold text-hot-pink glitch-brutal">
               PRAGUE SNUS AMBASSADOR
             </p>
-          </div>
+          </motion.div>
           
           <motion.div
-            animate={{ y: [0, 20, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity }}
-            className="mt-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
           >
-            <Award className="w-16 h-16 text-acid-pink mx-auto float-brutal" style={{ filter: 'drop-shadow(0 0 25px #FF10F0)' }} />
-            <p className="text-acid-pink text-sm mt-6 font-pixel tracking-wider">★ SCROLL DOWN ★</p>
+            <motion.div
+              animate={{ y: [0, 20, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
+              className="mt-16"
+            >
+              <Award className="w-16 h-16 text-acid-pink mx-auto float-brutal" style={{ filter: 'drop-shadow(0 0 25px #FF10F0)' }} />
+              <p className="text-acid-pink text-sm mt-6 font-pixel tracking-wider">★ SCROLL DOWN ★</p>
+            </motion.div>
           </motion.div>
         </motion.div>
       </section>
@@ -241,23 +240,32 @@ function App() {
       </section>
 
       {/* PLAYLIST */}
-      <section className="relative py-20 px-4 bg-black">
+      <section ref={playlistRef} className="relative py-20 px-4 bg-black">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-5xl sm:text-7xl font-black text-center mb-6 text-mega-neon glitch-brutal">
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isPlaylistInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8 }}
+            className="text-5xl sm:text-7xl font-black text-center mb-6 text-mega-neon glitch-brutal"
+          >
             ♪ PLAYLIST ♪
-          </h2>
-          <p className="text-center text-chrome mb-16 text-2xl font-black tracking-wider">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isPlaylistInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-center text-chrome mb-16 text-2xl font-black tracking-wider"
+          >
             THE SOUND
-          </p>
+          </motion.p>
           
           <div className="space-y-6">
             {artists.map((artist, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -100 }}
+                animate={isPlaylistInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className="pixel-border-brutal bg-gradient-to-r from-black via-acid-pink/20 to-black p-8 rounded-none transform hover:scale-105 transition-transform relative"
               >
                 <Music className="absolute -top-4 -right-4 w-10 h-10 text-acid-pink star-decoration bg-black p-2 rounded-full" style={{ filter: 'drop-shadow(0 0 10px #FF10F0)' }} />
@@ -280,7 +288,7 @@ function App() {
       </section>
 
       {/* MY PASSION - TECHNO */}
-      <section className="relative py-20 px-4">
+      <section ref={technoRef} className="relative py-20 px-4">
         <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
           <div className="absolute inset-0 opacity-30">
             {[...Array(30)].map((_, i) => (
@@ -300,29 +308,54 @@ function App() {
             ))}
           </div>
           <div className="text-center relative z-10">
-            <h3 className="text-7xl sm:text-9xl font-black text-green-400 mb-12 tracking-tighter matrix-glitch-brutal font-mono uppercase"
+            <motion.h3
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={isTechnoInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8 }}
+              className="text-6xl sm:text-8xl font-black text-green-400 mb-12 tracking-tighter matrix-glitch-brutal font-mono uppercase"
               style={{
                 textShadow: '0 0 30px #00ff00, 0 0 60px #00ff00',
               }}
             >
               ★ TECHNO ★
-            </h3>
-            <p className="text-3xl sm:text-5xl text-acid-pink font-black glitch-brutal uppercase">
+            </motion.h3>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isTechnoInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-3xl sm:text-5xl text-acid-pink font-black glitch-brutal uppercase"
+            >
               Raves 24/7. Harder. Faster. Pinker.
-            </p>
-            <Zap className="w-20 h-20 text-acid-pink mx-auto mt-12 float-brutal" style={{ filter: 'drop-shadow(0 0 20px #FF10F0)' }} />
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={isTechnoInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <Zap className="w-20 h-20 text-acid-pink mx-auto mt-12 float-brutal" style={{ filter: 'drop-shadow(0 0 20px #FF10F0)' }} />
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* THE ARCHIVE */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-black to-acid-pink/20">
+      <section ref={archiveRef} className="relative py-20 px-4 bg-gradient-to-b from-black to-acid-pink/20">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl sm:text-7xl font-black text-center mb-20 text-mega-neon glitch-brutal">
+          <motion.h2
+            initial={{ opacity: 0, y: -50 }}
+            animate={isArchiveInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="text-5xl sm:text-7xl font-black text-center mb-20 text-mega-neon glitch-brutal"
+          >
             ★ THE ARCHIVE ★
-          </h2>
+          </motion.h2>
           
-          <div className="relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isArchiveInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative overflow-hidden"
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -352,7 +385,7 @@ function App() {
                 </div>
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
           
           <div className="flex justify-center gap-4 mt-12">
             {mediaItems.map((_, index) => (
@@ -374,12 +407,15 @@ function App() {
       </section>
 
       {/* FOOTER */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-acid-pink/20 to-black border-t-4 border-acid-pink">
+      <section ref={footerRef} className="relative py-20 px-4 bg-gradient-to-b from-acid-pink/20 to-black border-t-4 border-acid-pink">
         <div className="max-w-2xl mx-auto text-center">
           <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isFooterInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-acid-pink hover:bg-cyber-pink text-black text-4xl sm:text-6xl font-black py-12 sm:py-16 rounded-none mb-16 neon-pulse-brutal transition-all uppercase border-8 border-black relative overflow-hidden"
+            className="w-full bg-acid-pink text-black text-4xl sm:text-6xl font-black py-12 sm:py-16 rounded-none mb-16 neon-pulse-brutal transition-all uppercase border-8 border-black relative overflow-hidden btn-press"
           >
             <Star className="absolute top-4 left-4 w-12 h-12 text-black star-decoration" />
             <Star className="absolute top-4 right-4 w-12 h-12 text-black star-decoration" />
@@ -387,14 +423,19 @@ function App() {
             ★ HIT ME UP ★
           </motion.button>
           
-          <div className="flex justify-center gap-8 sm:gap-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isFooterInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex justify-center gap-8 sm:gap-16"
+          >
             <a
               href="https://www.instagram.com/whoatemypopcorn?igsh=MTJ4NjlpNmllZHh2eg=="
               target="_blank"
               rel="noopener noreferrer"
               className="transform hover:scale-110 transition-transform"
             >
-              <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-acid-pink to-cyber-pink rounded-none flex items-center justify-center neon-pulse-brutal border-4 border-black">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-acid-pink to-cyber-pink rounded-none flex items-center justify-center neon-pulse-brutal border-4 border-black btn-press">
                 <Instagram className="w-10 h-10 sm:w-14 sm:h-14 text-black" />
               </div>
             </a>
@@ -405,19 +446,23 @@ function App() {
               rel="noopener noreferrer"
               className="transform hover:scale-110 transition-transform"
             >
-              <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-acid-pink to-cyber-pink rounded-none flex items-center justify-center neon-pulse-brutal border-4 border-black">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-acid-pink to-cyber-pink rounded-none flex items-center justify-center neon-pulse-brutal border-4 border-black btn-press">
                 <Send className="w-10 h-10 sm:w-14 sm:h-14 text-black" />
               </div>
             </a>
-          </div>
+          </motion.div>
           
-          <p className="text-acid-pink mt-16 font-pixel text-xs sm:text-sm tracking-wider"
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isFooterInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-acid-pink mt-16 font-pixel text-xs sm:text-sm tracking-wider"
             style={{
               textShadow: '0 0 10px #FF10F0',
             }}
           >
             ★ © 2024 VIPER OF OBOLON ★
-          </p>
+          </motion.p>
         </div>
       </section>
     </div>
