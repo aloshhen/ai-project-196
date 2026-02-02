@@ -16,11 +16,38 @@ function App() {
   ]
   
   const artists = [
-    'FreshFact ака Ромчик',
-    '9Mice',
-    'Lildrughill',
-    'Timati',
-    'Playboy Carti'
+    { 
+      name: 'FreshFact ака Ромчик',
+      image: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1770044416.jpg?'
+    },
+    { 
+      name: '9Mice',
+      image: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1770044350.jpg?'
+    },
+    { 
+      name: 'Lildrughill',
+      image: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1770044435.jpg?'
+    },
+    { 
+      name: 'ASAP Rocky',
+      image: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1770044537.jpg?'
+    },
+    { 
+      name: 'Playboy Carti',
+      image: 'https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1770044385.jpg?'
+    }
+  ]
+
+  const essenceItems = [
+    'Амбассадор снюса в Праге',
+    'Самый возбуждающий пупок',
+    'Магнолия',
+    'Leather pants power',
+    'Matcha Latte сип',
+    'Дракон на спине',
+    'Гнущиеся пальцы',
+    'Состоит в сообществе «Вайперы Оболони»',
+    'Roblox and TikTok is life'
   ]
   
   useEffect(() => {
@@ -76,9 +103,9 @@ function App() {
           transition={{ duration: 1 }}
           className="relative z-10 text-center"
         >
-          {/* Profile Photo Circle */}
+          {/* Profile Photo Circle - Made Larger */}
           <div className="mb-8 flex justify-center">
-            <div className="relative w-48 h-48 sm:w-64 sm:h-64">
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96">
               <div className="absolute inset-0 rounded-full pixel-border animate-pulse" />
               <img
                 src="https://oejgkvftpbinliuopipr.supabase.co/storage/v1/object/public/assets/user_347995964/edit-photo-1769987641.jpg?"
@@ -94,21 +121,6 @@ function App() {
             GOLUBENKO
           </h1>
           
-          <div className="space-y-3 mb-12">
-            <p className="text-xl sm:text-2xl font-bold text-neon-pink glitch tracking-wider">
-              Вайпер Оболони
-            </p>
-            <p className="text-lg sm:text-xl font-bold text-hot-pink tracking-wider">
-              Амбассадор снюса в Праге
-            </p>
-            <p className="text-lg sm:text-xl font-bold text-hot-pink tracking-wider">
-              Самый возбуждающий пупок
-            </p>
-            <p className="text-lg sm:text-xl font-bold text-hot-pink tracking-wider">
-              Любимый фильм: Магнолия
-            </p>
-          </div>
-          
           <motion.div
             animate={{ y: [0, 15, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -120,7 +132,7 @@ function App() {
         </motion.div>
       </section>
 
-      {/* THE ESSENCE */}
+      {/* THE ESSENCE - Redesigned */}
       <section 
         ref={essenceRef}
         className="relative min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-b from-fuchsia-600 via-fuchsia-900 to-black"
@@ -130,46 +142,25 @@ function App() {
             initial={{ opacity: 0, x: -100 }}
             animate={isEssenceInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-6xl font-black text-white mb-20 text-center glitch"
+            className="text-4xl sm:text-6xl font-black text-white mb-12 text-center glitch"
           >
-            THE ESSENCE
+            HIGHLIGHTS & QUOTES
           </motion.h2>
           
-          <div className="space-y-16">
-            <motion.div
-              initial={{ opacity: 0, x: -200 }}
-              animate={isEssenceInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-center"
-            >
-              <p className="text-2xl sm:text-4xl md:text-5xl font-black text-neon-pink tracking-tight leading-tight">
-                Leather Pants Power
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 200 }}
-              animate={isEssenceInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-center"
-            >
-              <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight glitch leading-tight">
-                Возбуждающая
-                <br className="sm:hidden" /> родинка на лбу
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: -200 }}
-              animate={isEssenceInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-center"
-            >
-              <p className="text-2xl sm:text-4xl md:text-5xl font-black text-neon-pink tracking-tight leading-tight">
-                Самый красивый
-                <br className="sm:hidden" /> в мире пупок
-              </p>
-            </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {essenceItems.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={isEssenceInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="pixel-border bg-gradient-to-br from-black to-fuchsia-950 p-6 rounded-xl transform hover:scale-105 transition-transform"
+              >
+                <p className="text-xl sm:text-2xl font-bold text-neon-pink text-center leading-tight">
+                  {item}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -195,13 +186,19 @@ function App() {
                 className="pixel-border bg-gradient-to-r from-black to-fuchsia-950 p-6 rounded-lg transform hover:scale-105 transition-transform"
               >
                 <div className="flex items-center gap-4">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 rounded-lg overflow-hidden border-2 border-hot-pink">
+                    <img
+                      src={artist.image}
+                      alt={artist.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="text-xl sm:text-2xl font-bold text-white flex-1">
+                    {artist.name}
+                  </p>
                   <div className="w-8 h-8 bg-hot-pink flex items-center justify-center" style={{ imageRendering: 'pixelated' }}>
                     <Music className="w-4 h-4 text-black" />
                   </div>
-                  <p className="text-xl sm:text-2xl font-bold text-white flex-1">
-                    {artist}
-                  </p>
-                  <div className="w-2 h-2 bg-hot-pink animate-pulse" />
                 </div>
               </motion.div>
             ))}
@@ -332,17 +329,6 @@ function App() {
           </p>
         </div>
       </section>
-
-      <style jsx>{`
-        @keyframes fall {
-          0% {
-            transform: translateY(-100%);
-          }
-          100% {
-            transform: translateY(100vh);
-          }
-        }
-      `}</style>
     </div>
   )
 }
