@@ -105,3 +105,12 @@
       0 0 20px #FF69B4;
   }
 }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
